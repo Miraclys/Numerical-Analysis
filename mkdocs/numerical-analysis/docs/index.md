@@ -1,92 +1,60 @@
-# Welcome to MkDocs
-
-For full documentation visit [mkdocs.org](https://www.mkdocs.org).
-
-## Commands
-
-* `mkdocs new [dir-name]` - Create a new project.
-* `mkdocs serve` - Start the live-reloading docs server.
-* `mkdocs build` - Build the documentation site.
-* `mkdocs -h` - Print help message and exit.
-
-## Project layout
-
-    mkdocs.yml    # The configuration file.
-    docs/
-        index.md  # The documentation homepage.
-        ...       # Other markdown pages, images and other files.
-
-#### 数学公式
-
-$$
-\sum
-$$
-
-$\int$
-
-#### Code
-
-```
-const express = require('express');
-const multer = require('multer');
-const serveIndex = require('serve-index');
-const path = require('path');
-const fs = require('fs');
-
-const app = express();
-const port = 3000;
-
-// Set the directory for file uploads
-const uploadDirectory = path.join(__dirname, 'uploads');
-fs.mkdirSync(uploadDirectory, { recursive: true });
-
-// Configure multer for file uploads
-const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-      cb(null, uploadDirectory); // 指定文件存储位置
-    },
-    filename: function (req, file, cb) {
-      // 使用原始文件名，并确保以UTF-8编码保存
-      cb(null, Buffer.from(file.originalname, 'latin1').toString('utf8'));
-    }
-});  
-
-const upload = multer({ storage: storage });
-
-// Serve the HTML file for uploading files
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'index.html'));
-});
-
-// Route for file uploads
-// app.post('/upload', upload.single('file'), (req, res) => {
-//   res.json({ message: 'File uploaded successfully' }); // Respond with JSON
-// });
-
-app.post('/upload', upload.single('file'), (req, res) => {
-    const originalName = req.file.originalname;
-    // 对原始文件名进行处理，例如URL编码
-    const encodedName = encodeURIComponent(originalName);
-    
-    // 将文件重命名为经过处理的名称
-    fs.renameSync(req.file.path, path.join(uploadDirectory, encodedName));
-  
-    res.json({ message: '文件上传成功' });
-});
-  
-// app.post('/upload', upload.single('file'), (req, res) => {
-//     let filename = decodeURIComponent(req.file.originalname); // Decode URI component
-//     // Rename the file to the decoded filename
-//     fs.renameSync(req.file.path, path.join(uploadDirectory, filename));
-    
-//     res.json({ message: '文件上传成功' });
-// });
+---
+title: 数值计算方法
+date: 2024-02-29 14:13:27
+tags:
+- Numerical Analysis
+description: 
+---
 
 
-// Serve files and enable directory listing
-app.use('/files', express.static(uploadDirectory), serveIndex(uploadDirectory, { 'icons': true }));
+---
 
-app.listen(port, () => {
-  console.log(`Server listening at http://localhost:${port}`);
-});
-```
+1. 二分法收敛性的证明
+
+2. 迭代程序结束的条件多样，直接指明迭代次数或者 ...
+
+3. 二分法误差的阶，误差估计定理
+
+4. 方程求根，不动点法 fixed point functional iteration 方程求根问题，转变为不动点求解问题，其实是有很多转换方法
+
+5. 不动点存在与唯一性。存在性的条件和唯一性的条件。证明唯一性的做法通常是反证法。
+
+6. 不动点的收敛性证明。证明使用到了微分中值定理与不动点存在的条件。
+
+7. 不动点误差范围的两个推论。第二个推论是变为很多个绝对值公式相加。
+
+8. 牛顿法或者切线法。和不动点？牛顿法的几个不同的视角？然后变为一个不动点问题？代数层面的理解和几何层面的理解。（牛顿法本质上还是不动点？）
+
+9. 牛顿法的收敛性证明？也就是牛顿法的初始值不是随便选的，而是在解的一个小邻域范围内。（我们的不动点是用来求解什么？不动点对于迭代的关系？）
+
+10. 对于牛顿法的初始点的选择？？牛顿法好是好，但是却需要求导。可不可以直接使用函数值去计算？不过在手链速率上，应该是切线比较快，不过割线也不会慢上很多。
+
+11. 对于上面的那一种方法的一个优化就是初始的两个点选择异号的两个点，计算切线，然后再选择这三个点中异号的两个点，如此迭代（错位法）。
+
+12. 割线法和错位法的收敛性我们都没有讲（因为用到很多泛函的东西）
+
+13. 收敛快慢的定义。lambda 体现不出收敛速度来，只是一个比例常数，但是 alpha 越大，收敛越快。如果 alpha 为 1，我们叫做线性收敛。
+
+14. 不动点是否是线性收敛的条件，或者是高阶的，取决于不动点处的导数是否是 0
+
+15. 泰勒展开的英文 Taylor polynomial。然后是对于一阶导为 0 的时候，直接计算二阶导。以此类推，求得更高阶的收敛。
+
+16. 先解决这个收敛性的问题，然后再去求收敛速度。lambda 的值是决定什么的收敛的？？？？
+
+17. 对于我们求解方程根的问题，如果我们等价成一个不动点的问题，本质上是假设了线性收敛。但是不一定是线性的，我们可以使用待定的方法来求解。然后对于二次的收敛，求解出来其实就是牛顿法，所以牛顿法其实是二次收敛的。
+
+18. 多重根的情况。单根的定义，它的一阶导数不能是 0，如果是 0 就是重根了。证明就是用几重根的定义。
+
+19. 仿照前面的过程，证明 m 阶重根的条件。
+
+20. 对于一个多重根（我们无法判断的时候？？？），我们构造一个函数 \mu，然后基于 \mu 做牛顿？做不动点？
+
+21. 重根变单根，然后使用牛顿去做。但是这个时候有一个缺陷，需要二阶的导数？？
+
+---
+
+Code:
+
+1. 牛顿法求解方程的根
+
+2. 二分法求解方程的根

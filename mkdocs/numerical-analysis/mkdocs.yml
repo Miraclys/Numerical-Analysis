@@ -8,13 +8,32 @@ repo_name: Numerical Analysis
 
 theme:
   name: material
+  # custom_dir: overrides
   # logo: assets/鲨鱼.jpg
   favicon: assets/鲨鱼.jpg
   language: en
   
   palette:
-    primary: 'deep purple'
-    accent: 'deep purple'
+    # - primary: 'white'
+    # - accent: 'white'
+    - media: "(prefers-color-scheme)"
+      toggle:
+        icon: material/link
+        name: Switch to light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/toggle-switch
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: black
+      accent: indigo
+      toggle:
+        icon: material/toggle-switch-off
+        name: Switch to system preference
 
   features:
     # - header.autohide
@@ -25,6 +44,13 @@ theme:
 nav:
   - Home: index.md
   - Lecture1: lecture1/lecture1.md
+  - Lecture2: 
+    - 'Chapter 2': lecture2/index.md
+    - 'The Bisection Method': lecture2/bisection.md
+    - 'Fixed Point Method': lecture2/fixed_point.md
+    - "Newton's Method": lecture2/Newtons.md 
+    # - 'Fixed-Point Iteration': lecture2/fixed-point-iteration.md
+    # - 'Newton's Method and Its Extensions': lecture2/newton.md
 
 markdown_extensions:
   - pymdownx.arithmatex:
