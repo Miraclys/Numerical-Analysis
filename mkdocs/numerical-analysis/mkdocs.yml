@@ -1,5 +1,7 @@
 site_name: Miraclys
 
+dev_addr: '127.0.0.1:5500' # 更改端口 port 号，默认为 8000
+
 repo_url: https://github.com/Miraclys/Numerical-Analysis
 
 repo_name: Numerical Analysis
@@ -48,9 +50,18 @@ nav:
     - 'Chapter 2': lecture2/index.md
     - 'The Bisection Method': lecture2/bisection.md
     - 'Fixed Point Method': lecture2/fixed_point.md
-    - "Newton's Method": lecture2/Newtons.md 
+    - "Newton's Method and Its Extensions": lecture2/Newtons.md 
+    - "Error Analysis of Iteration": lecture2/error_analysis.md
+    - "Accelerating Convergence": lecture2/Accelerate_convergence.md
+    - "Roots of Polynomials and Muller's Method": lecture2/Zero_points_of_polynomials_and_Mullers_method.md
     # - 'Fixed-Point Iteration': lecture2/fixed-point-iteration.md
     # - 'Newton's Method and Its Extensions': lecture2/newton.md
+  - Lecture3: 
+    - 'Chapter 3': lecture3/index.md
+    - 'Interpolation and Lagrange Polynomial': lecture3/lagrange.md
+    - 'Divided Difference': lecture3/divided_difference.md
+    - 'Hermite Interpolation': lecture3/Hermite.md
+    - 'Cubic Spline': lecture3/cubic_spline.md
 
 markdown_extensions:
   - pymdownx.arithmatex:
