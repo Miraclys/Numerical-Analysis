@@ -62,6 +62,15 @@ nav:
     - 'Divided Difference': lecture3/divided_difference.md
     - 'Hermite Interpolation': lecture3/Hermite.md
     - 'Cubic Spline': lecture3/cubic_spline.md
+  - Lecture4:
+    - 'Chapter 4': lecture4/index.md
+    - 'Differentiation': lecture4/differential.md
+    - 'Richardson Extrapolation': lecture4/richardson.md
+    - 'Numerical Integration': lecture4/numerical_integration.md
+    - 'Composite Numerical Integration': lecture4/composite_numerical_integration.md
+    - 'Romberg Integration': lecture4/romberg_integration.md
+    - 'Adaptive Quadrature': lecture4/adaptive_quadrature.md
+    - 'Gaussian Quadrature': lecture4/gaussian_quadrature.md
 
 markdown_extensions:
   - pymdownx.arithmatex:
