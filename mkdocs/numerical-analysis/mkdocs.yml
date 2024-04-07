@@ -71,6 +71,9 @@ nav:
     - 'Romberg Integration': lecture4/romberg_integration.md
     - 'Adaptive Quadrature': lecture4/adaptive_quadrature.md
     - 'Gaussian Quadrature': lecture4/gaussian_quadrature.md
+  - Lecture5:
+    - 'Chapter 5': lecture5/index.md
+    - 'Basic Theory of Initial Value Problems': lecture5/basic_theory_of_initial_value_problems.md
 
 markdown_extensions:
   - pymdownx.arithmatex:
