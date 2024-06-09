@@ -35,7 +35,7 @@ $$
 \begin{aligned}
 w_0 &= \alpha \\
 w_{i + 1} &= w_i + hf(t_i, w_i), i = 0, 1, \cdots, N - 1
-\end{algned}
+\end{aligned}
 $$
 
 所以我们可以看出来，Euler 方法其实是很不精确的，因为直接舍弃了误差项。
@@ -62,7 +62,7 @@ $$
 
 #### 定理 5.9
 
-假设 $f$ 是连续的，且在$D=\{(t,y)|a\leqslant t\leqslant b,-\infty<_y<\infty\}$上满足常数为 L 的 Lipschitz 条件，又假设存在常数 M 使得
+假设 $f$ 是连续的，且在 $D=\{(t,y)|a\leqslant t\leqslant b,-\infty<_y<\infty\}$ 上满足常数为 L 的 Lipschitz 条件，又假设存在常数 M 使得
 
 $$|y^{\prime\prime}(t)|\leqslant M$$
 
@@ -73,7 +73,7 @@ $$y^{\prime}=f(t,y),\quad a\leqslant t\leqslant b,\quad y(a)=\alpha$$
 的唯一解，$w_0,w_1,...,w_N$是由 Euler 法对某个正整数 N 产生的近似。则对于 $i=0,1,2,\cdots,N$, 有
 
 $$
-\mid y(t_{i})-w_{i}\mid\leqslant\frac{hM}{2L}[\:\mathrm{e}^{L(t_{i}-a)}-1\:]
+\mid y(t_{i})-w_{i}\mid\leqslant\frac{hM}{2L}[\mathrm{e}^{L(t_{i}-a)}-1\:]
 $$
  
 这一个定理的不足之处是我们需要解的二阶导数的界是已知的。但是我们可以通过求偏导的脸是法则来转换得到这个界。

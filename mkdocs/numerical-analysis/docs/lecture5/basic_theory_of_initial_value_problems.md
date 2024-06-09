@@ -3,7 +3,7 @@
 
 #### 定义 5.1
 
-函数 $f(t,y)$称为关于集合 $D\subset\mathbb{R}^2$上的变量 y 满足 Lipschitz 条件，如果存在一个常数 L>0 使得
+函数 $f(t,y)$ 称为关于集合 $D\subset\mathbb{R}^2$ 上的变量 y 满足 Lipschitz 条件，如果存在一个常数 L>0 使得
 
 $$
 \mid f(\:t\:,y_{1})-f(\:t\:,y_{2})\mid\leqslant L\mid y_{1}-y_{2}\mid 
@@ -13,7 +13,7 @@ $$
 
 #### 定义 5.2
 
-集合 $D\subset\mathbb{R}^2$称为是凸的，如果只要当$(t_1,y_1)$和$(t_2,y_2)$属于 $D$ 且$\lambda$ 在[0,1]中时，就有点$((1-\lambda)t_1+\lambda t_2,(1-\lambda)y_1+\lambda y_2)$也属于 $D$ 。
+集合 $D\subset\mathbb{R}^2$ 称为是凸的，如果只要当 $(t_1,y_1)$和$(t_2,y_2)$ 属于 $D$ 且 $\lambda$ 在[0,1]中时，就有点 $((1-\lambda)t_1+\lambda t_2,(1-\lambda)y_1+\lambda y_2)$ 也属于 $D$ 。
 
 #### 定理 5.3
 
@@ -23,11 +23,11 @@ $$
 |\frac{\partial f}{\partial y}(t, y)| \leq L
 $$
   
-对一切$(t,y)\in D$ 成立，则 $f$ 在$D$ 上关于变量 y 满足 Lipschitz 常数为 $L$ 的 Lipschitz 条件。
+对一切 $(t,y)\in D$ 成立，则 $f$ 在 $D$ 上关于变量 y 满足 Lipschitz 常数为 $L$ 的 Lipschitz 条件。
 
 #### 定理 5.4
 
-假设 $D=\{(t,y)|a\leqslant t\leqslant b,-\infty<y<\infty\}$,且 $f(t,y)$在 $D$ 上连续。如果 $f$在 $D$ 上关于变量 $y$ 满足 Lipschitz 条件，则初值问题
+假设 $D=\{(t,y)|a\leqslant t\leqslant b,-\infty<y<\infty\}$,且 $f(t,y)$ 在 $D$ 上连续。如果 $f$在 $D$ 上关于变量 $y$ 满足 Lipschitz 条件，则初值问题
 
 $$
 y^{\prime}(t)=f(t,y),\quad a\leqslant t\leqslant b,\quad y(a)=\alpha 
