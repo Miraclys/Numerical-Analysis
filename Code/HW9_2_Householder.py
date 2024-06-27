@@ -15,6 +15,8 @@ def Householder(A):
         Hk[k:, k:] -= 2 * np.outer(omega, omega) / np.dot(omega, omega)
         R = np.dot(Hk, R)
         Q = np.dot(Q, Hk)
+        print("Hk = \n", Hk)
+        # print("Q = \n", Q)
     return Q, R
 
 A = np.array([[1, 0, 0],

@@ -4,9 +4,11 @@ eps = 1e-5
 
 def f(x):
     return 1 / 2 + 1 / 4 * x **2 - x * math.sin(x) - 1 /2 * math.cos(2 * x)
+    # return x - (1 / 2 + 1 / 4 * x **2 - x * math.sin(x) - 1 /2 * math.cos(2 * x))
 
 def f_(x):
     return 0.5 * x - math.sin(x) - x * math.cos(x) + math.sin(2 * x)
+    # return 1 - (0.5 * x - math.sin(x) - x * math.cos(x) + math.sin(2 * x))
 
 def calculate_x(x):
     k = 0
@@ -42,7 +44,8 @@ plt.plot(range(len(x3)), x3, label='x3')
 plt.xlabel("iteration")
 plt.ylabel("x")
 plt.legend()
-plt.show()
+# plt.show()
+plt.savefig("HW2_3.png")
 # fig, axs = plt.subplots(1, 3, figsize=(15, 5))
 # axs[0].plot(range(len(x1)), x1, label='x1')
 # axs[0].set_xlabel("iteration")

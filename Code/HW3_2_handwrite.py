@@ -3,10 +3,13 @@ import math
 import matplotlib.pyplot as plt
 
 class Cubic_Spline_Interpolator:
-    def __init__(self, x, y):
+    def __init__(self, x, y, boundary_type='natural', fp0=None, fpn=None):
         self.x = x
         self.y = y
         self.h = np.diff(x)
+        self.boundary_type = boundary_type
+        self.fp0 = fp0
+        self.fpn = fpn
         self.C = self.get_Cubic_Spline_C()
         self.A = y
         self.B = np.zeros(len(self.h))
@@ -49,15 +52,45 @@ class Cubic_Spline_Interpolator:
     def get_Cubic_Spline_C(self):
         n = len(self.h)
         A = np.zeros((n + 1, n + 1))
-        A[0, 0] = 1
-        A[n, n] = 1
+        b = np.zeros(n + 1)
+
+        if self.boundary_type == 'natural':  # 自由边界条件
+            A[0, 0] = 1
+            A[n, n] = 1
+        elif self.boundary_type == 'clamped':  # 固定边界条件
+            A[0, 0] = 2 * self.h[0]
+            A[0, 1] = self.h[0]
+            A[n, n] = 2 * self.h[-1]
+            A[n, n - 1] = self.h[-1]
+            b[0] = 3 * (self.y[1] - self.y[0]) / self.h[0] - 3 * self.fp0
+            b[n] = 3 * self.fpn - 3 * (self.y[n] - self.y[n - 1]) / self.h[-1]
+        elif self.boundary_type == 'periodic':  # 周期边界条件
+            A[0, 0] = self.h[0]
+            A[0, 1] = 2 * self.h[0]
+            A[0, n] = 2 * self.h[-1]
+            A[0, n - 1] = self.h[-1]
+            A[n, 0] = 1
+            A[n, n] = -1
+            b[n] = 0
+            b[0] = 3 * (self.y[1] - self.y[0]) / self.h[0] - 3 * (self.y[n] - self.y[n - 1]) / self.h[-1]
+        elif self.boundary_type == 'special':
+            A[0, 0] = -self.h[1]
+            A[0, 1] = self.h[0] + self.h[1]
+            A[0, 2] = -self.h[0]
+            A[n, n - 2] = -self.h[-1]
+            A[n, n - 1] = self.h[-2] + self.h[-1]
+            A[n, n] = -self.h[-2]
+            b[0] = 0
+            b[n] = 0
+
         for i in range(1, n):
             A[i, i] = 2 * (self.h[i - 1] + self.h[i])
             A[i, i - 1] = self.h[i - 1]
             A[i, i + 1] = self.h[i]
-        b = np.zeros(n + 1)
+
         for i in range(1, n):
             b[i] = 3 * (self.y[i + 1] - self.y[i]) / self.h[i] - 3 * (self.y[i] - self.y[i - 1]) / self.h[i - 1]
+
         C = self.solve_equation(A, b)
         return C
 
@@ -88,20 +121,37 @@ if __name__ == '__main__':
     x0 = np.linspace(a, b, num)
     y0 = f(x0)
 
-    cubic_spline = Cubic_Spline_Interpolator(x0, y0)
+    # 自由边界
+    cubic_spline_natural = Cubic_Spline_Interpolator(x0, y0, boundary_type='natural')
     x_new = np.linspace(a, b, 100)
-    y_new = cubic_spline(x_new)
+    y_new_natural = cubic_spline_natural(x_new)
+    y_true = f(x_new)
+    plt.plot(x_new, y_new_natural - y_true, label='Cubic Spline Natural')
+    # plt.plot(x_new, y_new_natural, label='Cubic Spline Natural')
 
-    plt.plot(x0, y0, label='Data points')
-    plt.plot(x_new, y_new, label='Cubic Spline 11')
+    # 固定边界
+    fp0 = math.cos(a)
+    fpn = math.cos(b)
+    cubic_spline_clamped = Cubic_Spline_Interpolator(x0, y0, boundary_type='clamped', fp0=fp0, fpn=fpn)
+    y_new_clamped = cubic_spline_clamped(x_new)
+    plt.plot(x_new, y_new_clamped - y_true, label='Cubic Spline Clamped')
+    # plt.plot(x_new, y_new_clamped, label='Cubic Spline Clamped')
 
-    num = 21
-    x0 = np.linspace(a, b, num)
-    y0 = f(x0)
+    # 周期边界
+    cubic_spline_periodic = Cubic_Spline_Interpolator(x0, y0, boundary_type='periodic')
+    y_new_periodic = cubic_spline_periodic(x_new)
+    # plt.plot(x_new, y_new_periodic, label='Cubic Spline Periodic')
 
-    cubic_spline = Cubic_Spline_Normal_Interpolator(x0, y0)
-    x_new = np.linspace(a, b, 100)
-    y_new = cubic_spline(x_new)
-    plt.plot(x_new, y_new, label='Cubic Spline 21')
+    # 特殊边界
+    cubic_spline_special = Cubic_Spline_Interpolator(x0, y0, boundary_type='special')
+    y_new_special = cubic_spline_special(x_new)
+    # plt.plot(x_new, y_new_special, label='Cubic Spline Special')
+    plt.plot(x_new, y_new_special - y_true, label='Cubic Spline Special')
+
+    # plt.plot(x_new, y_true, label='ture function')
+
+    # plt.scatter(x0, y0, label='Data points', color='red')
     plt.legend()
+    # plt.title("Cubic Spline Interpolation with Different Boundary Conditions")
+    plt.title("Cubic Spline Interpolation Error with Different Boundary Conditions")
     plt.show()
